@@ -6,3 +6,7 @@ help:
 
 lint:
 	npx eslint .
+
+update:
+	sudo npm link
+	
