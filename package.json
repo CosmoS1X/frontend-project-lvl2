@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Project #2 on Hexlet",
-  "main": "index.js",
+  "main": "genDiff.js",
   "type": "module",
   "bin": {
     "gendiff": "bin/gendiff.js"
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/CosmoS1X/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^7.0.0"
+    "commander": "^7.0.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
