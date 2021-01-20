@@ -12,7 +12,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "npx jest"
+    "test": "npx -n --experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
