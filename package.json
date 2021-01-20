@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Project #2 on Hexlet",
-  "main": "genDiff.js",
+  "main": "index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
