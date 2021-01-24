@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import getData from './src/parser.js';
+import getData from './src/parsers.js';
 
 export default (filepath1, filepath2) => {
   const data1 = getData(filepath1);
