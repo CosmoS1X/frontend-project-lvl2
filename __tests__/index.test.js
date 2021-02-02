@@ -1,8 +1,7 @@
 import fs from 'fs';
 import getFixturePath from '../src/getFixturePath.js';
 import genDiff from '../index.js';
-import stylish, { getData } from '../src/parsers.js';
-import diff from '../src/diff.js';
+import stylish from '../src/parsers.js';
 
 const jsonF1 = getFixturePath('flat1.json');
 const jsonF2 = getFixturePath('flat2.json');
@@ -18,18 +17,16 @@ test('compare flat .yml files', () => {
   expect(stylish(genDiff(ymlF1, ymlF2))).toBe(expectedF);
 });
 
-const jsonR1 = getData(getFixturePath('recursive1.json'));
-const jsonR2 = getData(getFixturePath('recursive2.json'));
-const ymlR1 = getData(getFixturePath('recursive1.yml'));
-const ymlR2 = getData(getFixturePath('recursive2.yml'));
+const jsonR1 = getFixturePath('recursive1.json');
+const jsonR2 = getFixturePath('recursive2.json');
+const ymlR1 = getFixturePath('recursive1.yml');
+const ymlR2 = getFixturePath('recursive2.yml');
 const expectedR = fs.readFileSync(getFixturePath('expected_recursive'), 'utf-8');
-const jsonData = diff(jsonR1, jsonR2);
-const ymlData = diff(ymlR1, ymlR2);
 
 test('compare recursive .json files', () => {
-  expect(stylish(jsonData)).toBe(expectedR);
+  expect(stylish(genDiff(jsonR1, jsonR2))).toBe(expectedR);
 });
 
 test('compare recursive .yml files', () => {
-  expect(stylish(ymlData)).toBe(expectedR);
+  expect(stylish(genDiff(ymlR1, ymlR2))).toBe(expectedR);
 });
