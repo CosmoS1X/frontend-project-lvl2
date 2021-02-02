@@ -1,7 +1,7 @@
 import fs from 'fs';
 import getFixturePath from '../src/getFixturePath.js';
 import genDiff from '../index.js';
-import stylish from '../src/parsers.js';
+import stylish from '../formatters/stylish.js';
 
 const jsonF1 = getFixturePath('flat1.json');
 const jsonF2 = getFixturePath('flat2.json');

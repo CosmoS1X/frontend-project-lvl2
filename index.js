@@ -1,4 +1,4 @@
-import { getData } from './src/parsers.js';
+import getData from './src/parsers.js';
 import diff from './src/diff.js';
 
 export default (filepath1, filepath2) => {

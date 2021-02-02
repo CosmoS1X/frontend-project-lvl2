@@ -1,4 +1,4 @@
-import { getData } from '../src/parsers.js';
+import getData from '../src/parsers.js';
 import getFixturePath from '../src/getFixturePath.js';
 
 test('Get JSON data', () => {
