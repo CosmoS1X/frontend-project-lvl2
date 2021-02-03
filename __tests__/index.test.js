@@ -21,11 +21,24 @@ const jsonR2 = getFixturePath('recursive2.json');
 const ymlR1 = getFixturePath('recursive1.yml');
 const ymlR2 = getFixturePath('recursive2.yml');
 const expectedR = fs.readFileSync(getFixturePath('expected_recursive'), 'utf-8');
+const expectedP = fs.readFileSync(getFixturePath('expected_plain'), 'utf-8');
 
-test('compare recursive .json files', () => {
+test('compare recursive .json files with stylish format', () => {
   expect(genDiff(jsonR1, jsonR2, 'stylish')).toBe(expectedR);
 });
 
-test('compare recursive .yml files', () => {
+test('compare recursive .yml files with stylish format by default', () => {
   expect(genDiff(ymlR1, ymlR2)).toBe(expectedR);
+});
+
+test('compare recursive .json files with plain format', () => {
+  expect(genDiff(jsonR1, jsonR2, 'plain')).toBe(expectedP);
+});
+
+test('compare recursive .yml files with plain format', () => {
+  expect(genDiff(ymlR1, ymlR2, 'plain')).toBe(expectedP);
+});
+
+test('if formatter is unknown', () => {
+  expect(genDiff(ymlR1, ymlR2, 'test')).toBe('test is unknown formatter');
 });
