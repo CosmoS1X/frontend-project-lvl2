@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 const stringify = (data, depth) => {
   const tab = '    ';
   if (data === undefined || data === null || typeof data !== 'object') {
@@ -16,31 +17,21 @@ export default (data) => {
   const iter = (content, depth) => {
     const tab = '    ';
     const result = content.reduce((acc, item) => {
-      const {
-        name,
-        value,
-        status,
-        oldValue,
-        children,
-      } = item;
+      const { name, value, status, oldValue, children } = item;
+      const pattern = `${tab.repeat(depth)}  `;
 
-      if (status === 'hasChildren') {
-        return `${acc}${tab.repeat(depth)}    ${name}: ${iter(children, depth + 1)}\n`;
+      switch (status) {
+        case 'hasChildren':
+          return `${acc}${pattern}  ${name}: ${iter(children, depth + 1)}\n`;
+        case 'added':
+          return `${acc}${pattern}+ ${name}: ${stringify(value, depth)}\n`;
+        case 'deleted':
+          return `${acc}${pattern}- ${name}: ${stringify(value, depth)}\n`;
+        case 'changed':
+          return `${acc}${pattern}- ${name}: ${stringify(oldValue, depth)}\n${pattern}+ ${name}: ${stringify(value, depth)}\n`;
+        default:
+          return `${acc}${pattern}  ${name}: ${value}\n`;
       }
-      if (status === 'added') {
-        return `${acc}${tab.repeat(depth)}  + ${name}: ${stringify(value, depth)}\n`;
-      }
-      if (status === 'deleted') {
-        return `${acc}${tab.repeat(depth)}  - ${name}: ${stringify(value, depth)}\n`;
-      }
-      if (status === 'unchanged') {
-        return `${acc}${tab.repeat(depth)}    ${name}: ${value}\n`;
-      }
-      if (status === 'changed') {
-        return `${acc}${tab.repeat(depth)}  - ${name}: ${stringify(oldValue, depth)}\n${tab.repeat(depth)}  + ${name}: ${stringify(value, depth)}\n`;
-      }
-
-      return acc;
     }, '');
 
     return `{\n${result}${tab.repeat(depth)}}`;
