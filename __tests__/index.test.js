@@ -1,6 +1,6 @@
 import fs from 'fs';
 import getFixturePath from '../src/getFixturePath.js';
-import genDiff from '../index.js';
+import genDiff from '../formatters/index.js';
 
 const jsonF1 = getFixturePath('flat1.json');
 const jsonF2 = getFixturePath('flat2.json');
@@ -22,6 +22,7 @@ const ymlR1 = getFixturePath('recursive1.yml');
 const ymlR2 = getFixturePath('recursive2.yml');
 const expectedR = fs.readFileSync(getFixturePath('expected_recursive'), 'utf-8');
 const expectedP = fs.readFileSync(getFixturePath('expected_plain'), 'utf-8');
+const expectedJ = fs.readFileSync(getFixturePath('expected_json.json'), 'utf-8');
 
 test('compare recursive .json files with stylish format', () => {
   expect(genDiff(jsonR1, jsonR2, 'stylish')).toBe(expectedR);
@@ -37,6 +38,10 @@ test('compare recursive .json files with plain format', () => {
 
 test('compare recursive .yml files with plain format', () => {
   expect(genDiff(ymlR1, ymlR2, 'plain')).toBe(expectedP);
+});
+
+test('compare recursive .json files with json format', () => {
+  expect(genDiff(jsonR1, jsonR2, 'json')).toBe(JSON.stringify(JSON.parse(expectedJ)));
 });
 
 test('if formatter is unknown', () => {
