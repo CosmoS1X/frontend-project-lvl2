@@ -5,7 +5,7 @@ const diff = (data1, data2) => {
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
   const commonKeys = _.uniq([...keys1, ...keys2]);
-  const sorted = commonKeys.sort();
+  const sorted = commonKeys.slice().sort();
 
   return sorted.map((key) => {
     switch (true) {
