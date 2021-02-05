@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 const checkValue = (data) => {
   if (data === undefined || data === null) {
     return data;

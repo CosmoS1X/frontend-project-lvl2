@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 const stringify = (data, depth) => {
   const tab = '    ';
   if (data === undefined || data === null || typeof data !== 'object') {
