@@ -9,12 +9,12 @@ const diff = (data1, data2) => {
 
   return sorted.map((key) => {
     switch (true) {
-      case (_.has(data1, key) && typeof data1[key] === 'object') && (_.has(data2, key) && typeof data2[key] === 'object'):
+      case (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])):
         return { name: key, status: 'hasChildren', children: diff(data1[key], data2[key]) };
-      case _.has(data1, key) && _.has(data2, key) && (typeof data1[key] !== 'object' || typeof data2[key] !== 'object'):
-        return data1[key] === data2[key]
-          ? { name: key, value: data1[key], status: 'unchanged' }
-          : { name: key, value: data2[key], status: 'changed', oldValue: data1[key] };
+      case _.isEqual(data1[key], data2[key]):
+        return { name: key, value: data1[key], status: 'unchanged' };
+      case _.has(data1, key) && _.has(data2, key):
+        return { name: key, value: data2[key], status: 'changed', oldValue: data1[key] };
       case _.has(data1, key) && !_.has(data2, key):
         return { name: key, value: data1[key], status: 'deleted' };
       case !_.has(data1, key) && _.has(data2, key):
