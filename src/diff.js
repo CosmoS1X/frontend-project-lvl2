@@ -20,7 +20,7 @@ const diff = (data1, data2) => {
       case !_.has(data1, key) && _.has(data2, key):
         return { name: key, value: data2[key], status: 'added' };
       default:
-        return 'unknown state';
+        throw new Error('Unknown state');
     }
   });
 };
