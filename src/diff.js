@@ -15,9 +15,9 @@ const diff = (data1, data2) => {
         return { name: key, value: data1[key], status: 'unchanged' };
       case _.has(data1, key) && _.has(data2, key):
         return { name: key, value: data2[key], status: 'changed', oldValue: data1[key] };
-      case _.has(data1, key) && !_.has(data2, key):
+      case _.has(data1, key):
         return { name: key, value: data1[key], status: 'deleted' };
-      case !_.has(data1, key) && _.has(data2, key):
+      case _.has(data2, key):
         return { name: key, value: data2[key], status: 'added' };
       default:
         throw new Error('Unknown state');
