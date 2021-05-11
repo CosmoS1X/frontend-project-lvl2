@@ -1,6 +1,13 @@
 import fs from 'fs';
-import getFixturePath from '../src/getFixturePath.js';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import genDiff from '../formatters/index.js';
+
+const getFixturePath = (filename) => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  return path.join(__dirname, '..', '__fixtures__', filename);
+};
 
 const jsonF1 = getFixturePath('flat1.json');
 const jsonF2 = getFixturePath('flat2.json');
@@ -45,5 +52,5 @@ test('compare recursive .json files with json format', () => {
 });
 
 test('if formatter is unknown', () => {
-  expect(genDiff(ymlR1, ymlR2, 'test')).toBe('test is unknown formatter');
+  expect(() => genDiff(ymlR1, ymlR2, 'test')).toThrow();
 });

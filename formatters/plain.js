@@ -40,4 +40,4 @@ const buildStr = (data) => {
     .join('\n');
 };
 
-export default (data) => data.reduce((acc, item) => `${acc}${buildStr(item)}\n`, '').trimEnd();
+export default (data) => data.map((item) => buildStr(item)).join('\n');

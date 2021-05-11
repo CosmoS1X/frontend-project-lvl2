@@ -1,5 +1,5 @@
 export default (data) => {
-  const result = data.reduce((acc, item) => `${acc}${JSON.stringify(item)},`, '');
+  const result = data.map((item) => JSON.stringify(item)).join(',');
 
-  return `[${result.slice(0, result.length - 1)}]`;
+  return `[${result}]`;
 };

@@ -17,6 +17,6 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
     case 'json':
       return json(result);
     default:
-      return `${formatName} is unknown formatter`;
+      throw new Error(`${formatName} is unknown formatter`);
   }
 };
