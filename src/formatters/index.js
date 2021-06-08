@@ -1,22 +1,16 @@
-import getData from '../parsers.js';
-import diff from '../diff.js';
 import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-export default (filepath1, filepath2, formatName = 'stylish') => {
-  const data1 = getData(filepath1);
-  const data2 = getData(filepath2);
-  const result = diff(data1, data2);
-
-  switch (formatName) {
+export default (data, formatter) => {
+  switch (formatter) {
     case 'stylish':
-      return stylish(result);
+      return stylish(data);
     case 'plain':
-      return plain(result);
+      return plain(data);
     case 'json':
-      return json(result);
+      return json(data);
     default:
-      throw new Error(`${formatName} is unknown formatter`);
+      throw new Error(`${formatter} is unknown formatter`);
   }
 };

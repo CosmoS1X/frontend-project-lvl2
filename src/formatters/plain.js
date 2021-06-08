@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 const checkValue = (data) => {
   if (data === undefined || data === null) {
     return data;
@@ -13,15 +14,9 @@ const checkValue = (data) => {
   }
 };
 
-const buildStr = (data) => {
+const buildString = (data) => {
   const iter = (content, acc, ancestry) => {
-    const {
-      name,
-      value1,
-      value2,
-      type,
-      children,
-    } = content;
+    const { name, value1, value2, type, children } = content;
 
     const newAncestry = `${ancestry}.${name}`;
     const pattern = `${acc}Property '${newAncestry.slice(1)}'`;
@@ -46,4 +41,4 @@ const buildStr = (data) => {
     .join('\n');
 };
 
-export default (data) => data.map((item) => buildStr(item)).join('\n');
+export default (data) => data.map((item) => buildString(item)).join('\n');
