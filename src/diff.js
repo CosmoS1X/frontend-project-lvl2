@@ -10,15 +10,15 @@ const diff = (data1, data2) => {
   return sortedKeys.map((key) => {
     switch (true) {
       case (typeof data1[key] === 'object' && typeof data2[key] === 'object'):
-        return { name: key, status: 'hasChildren', children: diff(data1[key], data2[key]) };
+        return { name: key, type: 'hasChildren', children: diff(data1[key], data2[key]) };
       case data1[key] === data2[key]:
-        return { name: key, value: data1[key], status: 'unchanged' };
+        return { name: key, value1: data1[key], type: 'unchanged' };
       case _.has(data1, key) && _.has(data2, key):
-        return { name: key, value: data2[key], status: 'changed', oldValue: data1[key] };
+        return { name: key, value1: data2[key], type: 'changed', value2: data1[key] };
       case _.has(data1, key):
-        return { name: key, value: data1[key], status: 'deleted' };
+        return { name: key, value1: data1[key], type: 'deleted' };
       case _.has(data2, key):
-        return { name: key, value: data2[key], status: 'added' };
+        return { name: key, value1: data2[key], type: 'added' };
       default:
         throw new Error('Unknown state');
     }
