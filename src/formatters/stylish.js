@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 const stringify = (data, depth) => {
   const tab = '    ';
   if (data === undefined || data === null || typeof data !== 'object') {
@@ -17,7 +16,14 @@ export default (data) => {
   const iter = (content, depth) => {
     const tab = '    ';
     const result = content.reduce((acc, item) => {
-      const { name, value, status, oldValue, children } = item;
+      const {
+        name,
+        value,
+        status,
+        oldValue,
+        children,
+      } = item;
+
       const pattern = `${tab.repeat(depth)}  `;
 
       switch (status) {

@@ -32,5 +32,5 @@ test('If formatter is unknown', () => {
 describe.each(tests)('Test each formatter', (file1, file2, formatter, expected) => {
   test(`Compare ${path.extname(file1)} files with ${formatter} format`, () => {
     expect(genDiff(file1, file2, formatter)).toBe(expected);
-  })
+  });
 });
