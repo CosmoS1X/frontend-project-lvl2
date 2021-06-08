@@ -1,6 +1,6 @@
-import getData from './src/parsers.js';
-import genDiffObject from './src/genDiffObject.js';
-import applyFormatter from './src/formatters/index.js';
+import getData from './parsers.js';
+import genDiffObject from './genDiffObject.js';
+import applyFormatter from './formatters/index.js';
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = getData(filepath1);

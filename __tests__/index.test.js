@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import genDiff from '../index.js';
+import genDiff from '../src/index.js';
 
 const getFixturePath = (filename) => path.join('__fixtures__', filename);
 
@@ -12,7 +12,7 @@ const expectedStylish = fs.readFileSync(getFixturePath('stylish.txt'), 'utf-8');
 const expectedPlain = fs.readFileSync(getFixturePath('plain.txt'), 'utf-8');
 const expectedJSON = fs.readFileSync(getFixturePath('json.txt'), 'utf-8');
 
-const tests = [
+const datasets = [
   [json1, json2, 'stylish', expectedStylish],
   [yml1, yml2, 'stylish', expectedStylish],
   [json1, json2, 'plain', expectedPlain],
@@ -29,7 +29,7 @@ test('If formatter is unknown', () => {
   expect(() => genDiff(yml1, yml2, 'test')).toThrow();
 });
 
-describe.each(tests)('Test each formatter', (file1, file2, formatter, expected) => {
+describe.each(datasets)('Test each formatter', (file1, file2, formatter, expected) => {
   test(`Compare ${path.extname(file1)} files with ${formatter} format`, () => {
     expect(genDiff(file1, file2, formatter)).toBe(expected);
   });
